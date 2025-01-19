@@ -41,11 +41,20 @@ public class TikTokLiveHttpClient implements LiveHttpClient
     /**
 	 * <a href="https://github-wiki-see.page/m/isaackogan/TikTokLive/wiki/All-About-Signatures">Signing API by Isaac Kogan</a>
 	 */
-    private static final String TIKTOK_SIGN_API = "https://tiktok.eulerstream.com/webcast/fetch";
-    private static final String TIKTOK_URL_WEB = "https://www.tiktok.com/";
-    private static final String TIKTOK_URL_WEBCAST = "https://webcast.tiktok.com/webcast/";
-    public static final String TIKTOK_GIFTS_URL = "https://raw.githubusercontent.com/TikTok-LIVE-Private/GiftsGenerator/master/page/public/gifts.json";
-    public static final String TIKTOK_ROOM_GIFTS_URL = TIKTOK_URL_WEBCAST+"gift/list/";
+    public static String TIKTOK_SIGN_API = "https://tiktok.eulerstream.com/webcast/fetch";
+
+    /**
+     * Must end in a trailing '/' character.
+     */
+    public static String TIKTOK_URL_WEB = "https://www.tiktok.com/";
+    
+    /**
+     * Must end in a trailing '/' character.
+     */
+    public static String TIKTOK_URL_WEBCAST = "https://webcast.tiktok.com/webcast/";
+
+    public static String TIKTOK_GIFTS_URL = "https://raw.githubusercontent.com/TikTok-LIVE-Private/GiftsGenerator/master/page/public/gifts.json";
+    
     public static final int TIKTOK_AGE_RESTRICTED_CODE = 4003110;
 
     private final HttpClientFactory httpFactory;
@@ -83,7 +92,7 @@ public class TikTokLiveHttpClient implements LiveHttpClient
     }
 
     public GiftsData.Response getRoomGiftsData(String room_id) {
-        var result = httpFactory.client(TIKTOK_ROOM_GIFTS_URL)
+        var result = httpFactory.client(TIKTOK_URL_WEBCAST + "gift/list/")
             .withParam("room_id", room_id)
             .build()
             .toJsonResponse();
